@@ -1,0 +1,126 @@
+# Labor Dynamics Analysis Configuration
+# Copy this file to config.yaml and update with your settings
+
+# API Keys and Authentication
+api_keys:
+  bls_api_key: "YOUR_BLS_API_KEY_HERE"  # Required for BLS data access
+  census_api_key: "YOUR_CENSUS_API_KEY_HERE"  # Optional but recommended
+  fred_api_key: "YOUR_FRED_API_KEY_HERE"  # Optional for FRED data
+
+# Data Sources Configuration
+data_sources:
+  # Bureau of Labor Statistics
+  bls:
+    base_url: "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+    series_ids:
+      - "LNS11300000"  # Civilian Labor Force
+      - "LNS12300000"  # Employment Level
+      - "LNS13000000"  # Unemployment Level
+      - "LNS14000000"  # Unemployment Rate
+    
+  # National Center for Education Statistics
+  nces:
+    base_url: "https://api.ed.gov/data/"
+    datasets:
+      - "ipeds"  # Integrated Postsecondary Education Data System
+      - "naep"   # National Assessment of Educational Progress
+    
+  # Census Bureau
+  census:
+    base_url: "https://api.census.gov/data/"
+    surveys:
+      - "acs/acs1"  # American Community Survey 1-year
+      - "acs/acs5"  # American Community Survey 5-year
+    
+  # Federal Reserve Economic Data
+  fred:
+    base_url: "https://api.stlouisfed.org/fred/"
+    series_ids:
+      - "UNRATE"     # Unemployment Rate
+      - "PAYEMS"     # All Employees: Total Nonfarm
+      - "CIVPART"    # Labor Force Participation Rate
+
+# Analysis Parameters
+analysis:
+  # Time range for analysis
+  time_range:
+    start_year: 2000
+    end_year: 2024
+  
+  # Geographic scope
+  geography:
+    levels: ["national", "state", "msa"]
+    focus_states: ["CA", "TX", "NY", "FL", "IL"]
+  
+  # Demographic segments
+  demographics:
+    age_groups: ["16-24", "25-34", "35-44", "45-54", "55-64"]
+    education_levels: ["less_than_hs", "hs_diploma", "some_college", "bachelors", "graduate"]
+  
+  # Statistical methods
+  methods:
+    correlation_threshold: 0.3
+    significance_level: 0.05
+    seasonal_adjustment: true
+
+# Visualization Settings
+visualization:
+  # Default plot settings
+  plots:
+    figsize: [12, 8]
+    dpi: 300
+    style: "whitegrid"
+    color_palette: "viridis"
+  
+  # Dashboard configuration
+  dashboard:
+    port: 8050
+    debug: false
+    host: "127.0.0.1"
+  
+  # Export settings
+  export:
+    formats: ["png", "pdf", "svg"]
+    output_dir: "reports/figures"
+
+# Data Processing
+processing:
+  # Cache settings
+  cache:
+    enabled: true
+    directory: "data/cache"
+    expiry_days: 7
+  
+  # Data validation
+  validation:
+    check_missing_values: true
+    outlier_detection: true
+    data_quality_threshold: 0.95
+  
+  # Performance settings
+  performance:
+    parallel_processing: true
+    n_jobs: -1  # Use all available cores
+    chunk_size: 10000
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/labor_analysis.log"
+  max_file_size: "10MB"
+  backup_count: 5
+
+# Output Settings
+output:
+  # Report generation
+  reports:
+    format: "html"
+    template: "default"
+    include_code: false
+  
+  # Data export
+  data_export:
+    format: "csv"
+    compression: "gzip"
+    index: false
