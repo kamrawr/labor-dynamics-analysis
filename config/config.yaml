@@ -1,0 +1,77 @@
+# Labor Dynamics Analysis Configuration - Production
+
+# API Keys and Authentication
+api_keys:
+  bls_api_key: "fd1bd64699aa404a97eefd96c50d2d35"
+  census_api_key: "d33b111a3825bbc70d62b85937320de34637e2ac"
+  fred_api_key: ""  # Optional for FRED data
+
+# Data Sources Configuration
+data_sources:
+  # Bureau of Labor Statistics
+  bls:
+    base_url: "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+    series_ids:
+      - "LNS11300000"  # Civilian Labor Force
+      - "LNS12300000"  # Employment Level
+      - "LNS13000000"  # Unemployment Level
+      - "LNS14000000"  # Unemployment Rate
+      - "LNS11300012"  # Labor Force Participation Rate (16-19)
+      - "LNS12300012"  # Employment Population Ratio (16-19)
+    
+  # National Center for Education Statistics
+  nces:
+    base_url: "https://educationdata.urban.org/api/v1/"
+    datasets:
+      - "ipeds"  # Integrated Postsecondary Education Data System
+      - "naep"   # National Assessment of Educational Progress
+    
+  # Census Bureau
+  census:
+    base_url: "https://api.census.gov/data/"
+    surveys:
+      - "acs/acs1"  # American Community Survey 1-year
+      - "acs/acs5"  # American Community Survey 5-year
+
+# Analysis Parameters
+analysis:
+  # Time range for analysis
+  time_range:
+    start_year: 2010
+    end_year: 2024
+  
+  # Geographic scope
+  geography:
+    levels: ["national", "state"]
+    focus_states: ["CA", "TX", "NY", "FL", "IL"]
+  
+  # Statistical methods
+  methods:
+    correlation_threshold: 0.3
+    significance_level: 0.05
+    seasonal_adjustment: true
+
+# Visualization Settings
+visualization:
+  plots:
+    figsize: [12, 8]
+    dpi: 300
+    style: "whitegrid"
+    color_palette: "viridis"
+
+# Data Processing
+processing:
+  cache:
+    enabled: true
+    directory: "data/cache"
+    expiry_days: 1
+  
+  performance:
+    parallel_processing: true
+    n_jobs: -1
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/labor_analysis.log"
