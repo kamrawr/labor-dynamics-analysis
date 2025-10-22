@@ -36,24 +36,25 @@ logger = logging.getLogger(__name__)
 def parse_arguments():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
-        description='Run underemployment and career trajectories analysis'
+        description='Run underemployment and career trajectories analysis',
+        epilog='Example: python run_underemployment_analysis.py --data-path data/scorecard.csv --export-causal'
     )
     parser.add_argument(
         '--data-path',
         type=str,
-        default='/Users/isaiah/Projects/data25/collegedata/collegescorecard.csv',
-        help='Path to College Scorecard CSV file'
+        default=None,
+        help='Path to College Scorecard CSV file (required)'
     )
     parser.add_argument(
         '--output-dir',
         type=str,
         default='reports',
-        help='Directory to save analysis outputs'
+        help='Directory to save analysis outputs (default: reports/)'
     )
     parser.add_argument(
         '--export-causal',
         action='store_true',
-        help='Export dataset prepared for causal analysis'
+        help='Export dataset prepared for causal analysis (IV/DiD methods)'
     )
     return parser.parse_args()
 
@@ -67,11 +68,30 @@ def main():
     # Parse arguments
     args = parse_arguments()
     
+    # Check if data path was provided
+    if args.data_path is None:
+        logger.error("No data path provided!")
+        logger.info("")
+        logger.info("Please provide path to College Scorecard CSV file using --data-path")
+        logger.info("")
+        logger.info("Download College Scorecard data from:")
+        logger.info("  https://collegescorecard.ed.gov/data/")
+        logger.info("")
+        logger.info("Example usage:")
+        logger.info("  python run_underemployment_analysis.py --data-path data/scorecard.csv")
+        logger.info("")
+        sys.exit(1)
+    
     # Check if data file exists
     data_path = Path(args.data_path)
     if not data_path.exists():
         logger.error(f"Data file not found: {data_path}")
-        logger.info("Please provide a valid path to College Scorecard data using --data-path")
+        logger.info("")
+        logger.info("Please check the file path and try again.")
+        logger.info("")
+        logger.info("If you don't have the data yet, download from:")
+        logger.info("  https://collegescorecard.ed.gov/data/")
+        logger.info("")
         sys.exit(1)
     
     # Create output directory

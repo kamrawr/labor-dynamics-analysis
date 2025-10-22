@@ -197,37 +197,52 @@ dashboard = create_dashboard(results)
 plot_trends(enrollment_data, employment_data, save_path='reports/')
 ```
 
-### 4. Underemployment Analysis (NEW)
+### 4. Underemployment Analysis (NEW) ⭐
+
+> **📖 [View Quick Start Guide →](docs/UNDEREMPLOYMENT_QUICKSTART.md)**
+
+Analyze field-level underemployment patterns, career trajectories, and institutional effects using College Scorecard data.
+
+**Quick Command Line Usage:**
+```bash
+# Download data first from: https://collegescorecard.ed.gov/data/
+
+# Run analysis
+python run_underemployment_analysis.py --data-path data/raw/collegescorecard.csv
+
+# With causal dataset export
+python run_underemployment_analysis.py --data-path data/raw/collegescorecard.csv --export-causal
+```
+
+**Python API:**
 ```python
 from src.analysis import UnderemploymentAnalyzer, load_college_scorecard_data
 
-# Load College Scorecard data
-df = load_college_scorecard_data('path/to/collegescorecard.csv')
+# Load data
+df = load_college_scorecard_data('data/raw/collegescorecard.csv')
 
-# Initialize analyzer
+# Run analysis
 analyzer = UnderemploymentAnalyzer(df)
-
-# Run complete analysis
 results = analyzer.run_complete_analysis()
 
-# Field-level risk analysis
-field_risk = analyzer.analyze_field_level_risk()
-
-# Export for causal analysis
-analyzer.export_for_causal_analysis('data/processed/causal_data.csv')
+# Access specific results
+field_risk = results['field_risk']  # 23 fields of study
+completion_gradient = results['completion_gradient']  # Earnings by completion
+scarring = results['scarring_analysis']  # Career trajectory patterns
 ```
 
-**Or run via command line:**
+**Interactive Notebook:**
 ```bash
-# Run with default settings
-python run_underemployment_analysis.py
-
-# Specify custom data path
-python run_underemployment_analysis.py --data-path /path/to/data.csv
-
-# Export dataset for causal analysis
-python run_underemployment_analysis.py --export-causal
+jupyter lab notebooks/05_underemployment_analysis.ipynb
 ```
+
+**Key Features:**
+- 📊 Field-level underemployment risk (23 fields: Liberal Arts → Engineering)
+- 📈 Completion rate gradients ($10K-15K earnings gap)
+- 🏫 Institution type effects (Public/Private/For-Profit)
+- 💰 Socioeconomic stratification (Pell Grant analysis)
+- ⚠️ Career "scarring" indicators (55%+ high-risk institutions)
+- 🔬 Export for causal inference (IV/DiD-ready datasets)
 
 ## 📋 Usage Examples
 

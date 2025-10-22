@@ -1,0 +1,35 @@
+# Data Paths Configuration
+# Copy this to data_paths.yaml and update with your actual paths
+
+# College Scorecard Data
+scorecard:
+  # Path to College Scorecard CSV file
+  # Download from: https://collegescorecard.ed.gov/data/
+  file_path: "data/raw/collegescorecard.csv"
+  
+  # Alternative: Use sample/test data
+  # file_path: "data/raw/scorecard_sample.csv"
+
+# BLS Employment Data
+bls:
+  cache_dir: "data/raw/bls/"
+  
+# NCES Enrollment Data  
+nces:
+  cache_dir: "data/raw/nces/"
+
+# Census Demographic Data
+census:
+  cache_dir: "data/raw/census/"
+
+# FRED Economic Data
+fred:
+  cache_dir: "data/raw/fred/"
+
+# Processed Data Outputs
+processed:
+  output_dir: "data/processed/"
+  
+# Analysis Reports
+reports:
+  output_dir: "reports/"

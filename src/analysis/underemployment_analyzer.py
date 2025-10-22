@@ -330,15 +330,30 @@ def load_college_scorecard_data(file_path: str) -> pd.DataFrame:
     """
     Load College Scorecard data from CSV file.
     
+    This is a convenience wrapper that uses the ScorecardCollector.
+    For more advanced usage, use ScorecardCollector directly.
+    
     Args:
         file_path: Path to College Scorecard CSV file
         
     Returns:
         DataFrame with College Scorecard data
+        
+    Raises:
+        FileNotFoundError: If data file doesn't exist
     """
+    from pathlib import Path
+    
+    file_path = Path(file_path)
+    if not file_path.exists():
+        raise FileNotFoundError(
+            f"College Scorecard data file not found: {file_path}\n"
+            f"Please provide a valid path to the College Scorecard CSV file."
+        )
+    
     logger.info(f"Loading College Scorecard data from {file_path}...")
     df = pd.read_csv(file_path, low_memory=False)
-    logger.info(f"Loaded {len(df)} institutions")
+    logger.info(f"Loaded {len(df):,} institutions with {len(df.columns)} columns")
     return df
 
 
