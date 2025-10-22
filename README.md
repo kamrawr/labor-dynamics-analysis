@@ -1,8 +1,27 @@
 # Labor Dynamics Analysis: College Enrollment vs Employment Trends
 
-A comprehensive analysis of the relationship between college enrollment patterns and labor market employment dynamics in the United States.
+---
+
+<div align="center">
+
+## 🎯 **[→ VIEW INTERACTIVE DASHBOARD ←](https://kamrawr.github.io/labor-dynamics-analysis/)** 🎯
+
+### **Live analysis with visualizations, correlations, and key findings**
+
+[![View Dashboard](https://img.shields.io/badge/🌐_Interactive-Dashboard-blue?style=for-the-badge&labelColor=0f4c75)](https://kamrawr.github.io/labor-dynamics-analysis/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-green?style=for-the-badge&logo=github)](https://kamrawr.github.io/labor-dynamics-analysis/)
+
+**📊 Statistical Analysis** • **📈 Real BLS Data** • **🔍 Policy Insights** • **🎓 Education Trends**
+
+</div>
+
+---
 
 ## 📊 Project Overview
+
+A comprehensive analysis of the relationship between college enrollment patterns and labor market employment dynamics in the United States.
+
+> 💡 **Want to see the results?** The [interactive dashboard](https://kamrawr.github.io/labor-dynamics-analysis/) includes all visualizations, statistical correlations, key findings, and policy insights in an easy-to-navigate format.
 
 This project examines the complex interplay between higher education participation and labor market outcomes, providing insights into:
 
@@ -105,6 +124,40 @@ cp config/config.sample.yaml config/config.yaml
 # Edit configuration with your API keys and preferences
 # Required: BLS API key, Census API key (optional but recommended)
 ```
+
+## 🌐 Viewing the Analysis
+
+The easiest way to explore the analysis results is through the **[interactive dashboard](https://kamrawr.github.io/labor-dynamics-analysis/)**.
+
+### GitHub Pages Setup
+
+To enable the rendered visualization page:
+
+1. Go to your repository settings on GitHub
+2. Navigate to **Pages** (under "Code and automation")
+3. Under **Source**, select "Deploy from a branch"
+4. Select branch: `main` and folder: `/docs`
+5. Click **Save**
+6. Your page will be available at: `https://kamrawr.github.io/labor-dynamics-analysis/`
+
+### Setting Repository Website
+
+Make the dashboard easily discoverable:
+
+1. Go to your repository main page
+2. Click the ⚙️ (gear icon) next to "About" on the right sidebar
+3. In the "Website" field, enter: `https://kamrawr.github.io/labor-dynamics-analysis/`
+4. Check ☑️ "Use your GitHub Pages website"
+5. Add description: `Interactive dashboard analyzing U.S. college enrollment and employment trends with real BLS data`
+6. Add topics: `data-analysis`, `education`, `labor-market`, `statistics`, `visualization`
+7. Click **Save changes**
+
+The `docs/index.html` file contains a fully rendered analysis dashboard with:
+- 📈 Interactive visualizations
+- 📊 Statistical correlation analysis  
+- 🔍 Key findings and trends
+- 🎯 Policy implications
+- 📝 Methodology documentation
 
 ## 🚀 Quick Start
 
