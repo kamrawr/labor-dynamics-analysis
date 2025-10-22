@@ -52,6 +52,8 @@ This project examines the complex interplay between higher education participati
 - **Time Series Analysis**: Seasonal and cyclical pattern identification
 - **Regression Analysis**: Causal relationship exploration
 - **Clustering Analysis**: Identifying similar regions/demographics patterns
+- **Underemployment Analysis**: Field-level career trajectory and earnings patterns
+- **Scarring Effects**: Analysis of long-term impacts of initial underemployment
 
 ## 🗂️ Project Structure
 
@@ -66,15 +68,17 @@ labor-dynamics-analysis/
 │   ├── 02_enrollment_analysis.ipynb
 │   ├── 03_employment_trends.ipynb
 │   ├── 04_correlation_analysis.ipynb
-│   └── 05_predictive_modeling.ipynb
+│   └── 05_underemployment_analysis.ipynb  # NEW: Underemployment patterns
 ├── src/
 │   ├── data_collection/  # Data gathering and API interfaces
 │   ├── analysis/         # Core analysis functions
+│   │   └── underemployment_analyzer.py  # NEW: Underemployment module
 │   └── visualization/    # Plotting and dashboard utilities
 ├── config/               # Configuration files and parameters
 ├── tests/               # Unit tests and validation
 ├── docs/                # Documentation and methodology
-└── reports/             # Generated analysis reports
+├── reports/             # Generated analysis reports
+└── run_underemployment_analysis.py  # NEW: Standalone analysis runner
 ```
 
 ## 📊 Data Sources
@@ -84,6 +88,7 @@ labor-dynamics-analysis/
 - **Bureau of Labor Statistics (BLS)**: Employment and unemployment statistics
 - **Census Bureau**: Demographic and economic indicators
 - **Federal Reserve Economic Data (FRED)**: Economic indicators
+- **College Scorecard**: Institution-level outcomes, earnings, completion rates
 
 ### Data Coverage
 - **Time Period**: 2000-2024 (varies by dataset)
@@ -190,6 +195,38 @@ dashboard = create_dashboard(results)
 
 # Generate trend plots
 plot_trends(enrollment_data, employment_data, save_path='reports/')
+```
+
+### 4. Underemployment Analysis (NEW)
+```python
+from src.analysis import UnderemploymentAnalyzer, load_college_scorecard_data
+
+# Load College Scorecard data
+df = load_college_scorecard_data('path/to/collegescorecard.csv')
+
+# Initialize analyzer
+analyzer = UnderemploymentAnalyzer(df)
+
+# Run complete analysis
+results = analyzer.run_complete_analysis()
+
+# Field-level risk analysis
+field_risk = analyzer.analyze_field_level_risk()
+
+# Export for causal analysis
+analyzer.export_for_causal_analysis('data/processed/causal_data.csv')
+```
+
+**Or run via command line:**
+```bash
+# Run with default settings
+python run_underemployment_analysis.py
+
+# Specify custom data path
+python run_underemployment_analysis.py --data-path /path/to/data.csv
+
+# Export dataset for causal analysis
+python run_underemployment_analysis.py --export-causal
 ```
 
 ## 📋 Usage Examples
